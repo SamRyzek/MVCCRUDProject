@@ -1,0 +1,10 @@
+planetName, planetDiameter, planetLengthOfDay, planetDistanceFromSun
+Mercury   , 4879          , 4222             , 58_000_000
+Venus     , 12104         , 2802             , 108_000_000
+Earth     , 12746         , 24               , 149_000_000
+Mars      , 6792          , 26               , 227_000_000
+Jupiter   , 142_984       , 10               , 778_000_000
+Saturn    , 120_536       , 11               , 1_433_000_000
+Uranus    , 51_118        , 18               , 2_872_000_000
+Neptune   , 49_528        , 16               , 4_495_000_000
+Pluto     , 2370          , 153              , 5_906_000_000

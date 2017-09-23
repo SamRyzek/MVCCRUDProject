@@ -1,0 +1,23 @@
+body {
+	background-image: url("3D-Solar-System-Wallpaper.jpg");
+	background-color: black;
+	background-size: cover;
+	background-repeat:no-repeat;
+	text-align: center;
+}
+
+.navbar:link{
+	background-color: transparent;
+	color: blue;
+	text-decoration: underline;
+}
+
+html{
+	color: white;
+	font-size:24px;
+}
+
+.list
+{
+	
+}
