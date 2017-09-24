@@ -9,10 +9,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
+
+@Component
+@Primary
 public class PlanetDBDAOImpl implements PlanetDAO {
-	private static String url = "jdbc:mysql://localhost:3306/sdvid";
-	private String user = "student";
-	private String pass = "student";
+	private static String url = "jdbc:mysql://localhost:3306/planetsDB";
+	private String user = "root";
+	private String pass = "root";
 
 	public PlanetDBDAOImpl() {
 		try {
@@ -25,24 +30,33 @@ public class PlanetDBDAOImpl implements PlanetDAO {
 
 	@Override
 	public Planet getPlanet(String planetname) {
-		String pname = null;
-		Planet planet = null;
+	
+		
 		try {
+			Planet planet = new Planet();
 			Connection conn = DriverManager.getConnection(url, user, pass);
-			String sql = "SELECT name FROM planet WHERE name = ?";
+			String sql = "SELECT name, diameter, length_of_days, distance_from_sun FROM planets WHERE name = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, planetname);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
-				pname = rs.getString(1);
+				String pname = rs.getString(1);
+				String pdiameter = rs.getString(2);
+				String plengthofdays = rs.getString(3);
+				String pdistancefromsun = rs.getString(4);
+				planet.setPlanetName(pname);
+				planet.setPlanetDiameter(pdiameter);
+				planet.setPlanetLengthOfDays(plengthofdays);
+				planet.setPlanetDistanceFromSun(pdistancefromsun);
 			}
 			rs.close();
 			stmt.close();
 			conn.close();
+			return planet;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return planet;
+		return null;
 	}
 
 	public List<Planet> getAllPlanets() {
@@ -50,9 +64,9 @@ public class PlanetDBDAOImpl implements PlanetDAO {
 		String planetname = null;
 		try {
 			Connection conn = DriverManager.getConnection(url, user, pass);
-			String sql = "SELECT name, diameter, length_of_day, distance_from_sun" + " FROM planets WHERE name = ?";
+			String sql = "SELECT name, diameter, length_of_days, distance_from_sun FROM planets";
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setString(1, planetname);
+//			stmt.setString(1, planetname);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				String name = rs.getString(1);
@@ -73,11 +87,12 @@ public class PlanetDBDAOImpl implements PlanetDAO {
 
 	@Override
 	public void addPlanet(Planet planet) {
+		System.out.println("a;sldkfsad;lfjsda");
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(url, user, pass);
 			conn.setAutoCommit(false); // START TRANSACTION
-			String sql = "INSERT INTO planets (name, diameter, length_of_day, distance_from_sun)"
+			String sql = "INSERT INTO planets (name, diameter, length_of_days, distance_from_sun)"
 					+ " VALUES (?, ?, ?, ?) ";
 			PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, planet.getPlanetName());
@@ -86,7 +101,7 @@ public class PlanetDBDAOImpl implements PlanetDAO {
 			stmt.setString(4, planet.getPlanetDistanceFromSun());
 
 			int updateCount = stmt.executeUpdate();
-
+			System.out.println(updateCount);
 			if (updateCount == 1) { // if we add one
 				ResultSet keys = stmt.getGeneratedKeys();
 				if (keys.next()) {
@@ -146,20 +161,27 @@ public class PlanetDBDAOImpl implements PlanetDAO {
 
 	@Override
 	public Planet updatePlanet(Planet updatePlanet) {
+		System.out.println("a;sldkfsad;lfjsda");
+
 		Connection conn = null;
-		Planet planet = null;
 		try {
+			Planet planet = new Planet();
 			conn = DriverManager.getConnection(url, user, pass);
 			conn.setAutoCommit(false); // START TRANSACTION
-			String sql = "UPDATE planets SET name = ?";
+			String sql = "UPDATE planets SET name = ?, diameter = ?, length_of_days = ?, distance_from_sun = ? WHERE name = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setString(1, planet.getPlanetName());
-			stmt.setString(2, planet.getPlanetDiameter());
-			stmt.setString(3, planet.getPlanetLengthOfDays());
-			stmt.setString(4, planet.getPlanetDistanceFromSun());
-			int updateCount = stmt.executeUpdate();
+			int updateCount = 0;
+			System.out.println(updatePlanet);
+			System.out.println(stmt.toString());
+			stmt.setString(1, updatePlanet.getPlanetName());
+			stmt.setString(2, updatePlanet.getPlanetDiameter());
+			stmt.setString(3, updatePlanet.getPlanetLengthOfDays());
+			stmt.setString(4, updatePlanet.getPlanetDistanceFromSun());
+			stmt.setString(5, updatePlanet.getPlanetName());
+//			stmt.setString(3, planet.getPlanetLengthOfDays());
+			updateCount = stmt.executeUpdate();
 			conn.commit(); // COMMIT TRANSACTION
-
+			return planet;
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 			if (conn != null) {
@@ -171,7 +193,6 @@ public class PlanetDBDAOImpl implements PlanetDAO {
 			}
 			throw new RuntimeException("Error updating planet.");
 		}
-		return planet;
 	}
 
 }

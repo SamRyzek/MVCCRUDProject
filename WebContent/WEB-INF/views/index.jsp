@@ -16,8 +16,9 @@ ul {
 	overflow: hidden;
 	background-color: #333;
 	position: fixed;
-	top: 0;
+	bottom: 0;
 	width: 100%;
+	color: white;
 }
 
 li {
@@ -39,6 +40,17 @@ li a:hover {
 body {
 	text-align: center;
 }
+
+html {
+	background-image: url("3D-Solar-System-Wallpaper.jpg");
+	background-color: black;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.list{
+	vertical-align:center;
+}
+
 </style>
 </head>
 <body>
@@ -54,12 +66,14 @@ body {
 	</div>
 	<div class="list">
 
-		<!-- <form action="GetPlanetData.do" method="GET"> -->
-			<c:forEach items="${planetData}" var="planet">
-				<a href="GetPlanetData.do?planetname=${planet.planetName}"> Planet <c:out value="${planet.planetName}" /></a>
-				<p>
-			</c:forEach>
-		<!-- </form> -->
+
+		<c:forEach items="${planetData}" var="planet">
+			<a href="GetPlanetData.do?planetname=${planet.planetName}">
+				Planet <c:out value="${planet.planetName}" />
+			</a>
+			<p>
+		</c:forEach>
+
 	</div>
 </body>
 </html>
