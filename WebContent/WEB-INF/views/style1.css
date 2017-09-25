@@ -1,0 +1,16 @@
+body {
+	background-image: url("SolarSystem.jpg");
+	background-color: black;
+	background-size: cover;
+	background-repeat:no-repeat;
+}
+
+.navbar:link{
+	background-color: transparent;
+	color: blue;
+	text-decoration: underline;
+}
+
+html{
+	color: white;
+}

@@ -18,6 +18,7 @@ ul {
 	position: fixed;
 	width: 100%;
 	color: white;
+	bottom: 0;
 }
 
 li {
@@ -27,18 +28,18 @@ li {
 li a {
 	display: block;
 	color: white;
-	text-align: center;
+	text-align: bottom;
 	padding: 14px 16px;
 	text-decoration: none;
 }
 
 li a:hover {
-	background-color: #111;
+	background-color: white;
 }
 
 
 html {
-
+	background-image: url("3D-Solar-System-Wallpaper.jpg");
 	background-color: black;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -61,10 +62,10 @@ html {
 			<li><a href="updatePlanet.html">Update Planet</a></li>
 		</ul>
 	</div>
-</body>
 
 
-	<div class="list" style="position: center; bottom:5px; padding-top: 120px">
+
+	<div class="list">
 		<c:forEach items="${planetData}" var="planet">
 			<a href="GetPlanetData.do?planetname=${planet.planetName}">
 				Planet <c:out value="${planet.planetName}" />
@@ -72,5 +73,6 @@ html {
 			<p>
 		</c:forEach>
 	</div>
+</body>
 
 </html>
