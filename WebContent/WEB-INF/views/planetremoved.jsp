@@ -10,9 +10,14 @@
 <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
-	
-	--> put an if around this for when null condition exists.		
-	${planetName} removed
+	<c:choose>
+		<c:when test= "${empty planetName}">
+				No Planet Exists
+		</c:when>
+		<c:otherwise>
+				${planetName} removed
+		</c:otherwise>
+	</c:choose>
 	
 	<br></br>
 	<a href="GetAllPlanets.do">Return to Main Menu</a>
