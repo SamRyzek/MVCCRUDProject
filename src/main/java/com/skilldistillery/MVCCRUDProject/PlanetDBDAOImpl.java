@@ -15,11 +15,6 @@ import org.springframework.stereotype.Component;
 @Component
 @Primary
 public class PlanetDBDAOImpl implements PlanetDAO {
-//	private static String url = "jdbc:mysql://localhost:3306/planetsDB";
-	private static String url = "jdbc:mysql://localhost:3306/myDB";
-	private String user = "root";
-	private String pass = "Slylockluck123!@#";
-//	private String pass = "root";
 
 	public PlanetDBDAOImpl() {
 		try {
