@@ -1,4 +1,4 @@
-# MVCCRUDProject
+# PlanetsProject
 This project was made by Sam Ryzek using C.R.U.D (Create, Read, Update, Delete) methodology. The subject of the project was our solar system's planets. On a grander scale, this project could be expanded to allow for the addition of other stars and planets. Further application expansion could allow for moon addition in a nested form. Further functionality will include photos of the planets when they are called along with a more pleasent presentation of planet information.
 
 The technology used in this project was Spring, HTML/CSS, and Java. 
